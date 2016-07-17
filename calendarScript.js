@@ -1,10 +1,16 @@
 var month = ["July", "August", "September", "October", "November", "December"];//"January", "Febuary", "March", "April", "May", "June", 
+var d = new Date();
+var n = d.getMonth();
 window.onload = function(){
     var div = document.getElementsByTagName("div");
     var length = div.length;
     var len;
-    var j = 0, empty = 4, offThree = true, workDays = 1;// already worked for 1 day
+    var j = 0, empty = 4, offThree = true, curMonth = false, clas = '', workDays = 1;// already worked for 1 day
     for(var i = 0; i < length; i++){
+        if(i == n - 6)
+        {
+            curMonth = true;
+        }
         var day = "";
         for(var x = 0; x < empty; x++){
             day += "<li></li>";
@@ -32,11 +38,19 @@ window.onload = function(){
             }
         }
         for(var k = 1; k <= len;){
+            if(curMonth && k == d.getDate())
+            {
+                clas = " class = 'today'";
+                curMonth = false;
+            }else
+            {
+                clas = '';
+            }
             if(workDays == 5){
                 if(offThree){
-                   day += "<li><span class='active'>" + k++ + "</span></li>";
-                   day += "<li><span class='active'>" + k++ + "</span></li>";
-                   day += "<li><span class='active'>" + k++ + "</span></li>";                   
+                   day += "<li"+ clas +"><span class='active'>" + k++ + "</span></li>";
+                   day += "<li"+ clas +"><span class='active'>" + k++ + "</span></li>";
+                   day += "<li"+ clas +"><span class='active'>" + k++ + "</span></li>";                   
                    offThree = false;
                 }else{
                    day += "<li><span class='active'>" + k++ + "</span></li>";
@@ -45,7 +59,7 @@ window.onload = function(){
                 }
                 workDays = 0;
             }else{
-                day += "<li>" + k + "</li>"; //<span class="active">10</span>
+                day += "<li"+ clas +">" + k + "</li>";
                 k++;
                 workDays++;
             }
@@ -75,14 +89,3 @@ window.onload = function(){
         j = j + 2;        
     }
 }
-/* <ul class="weekdays">
-  <li>Mo</li>
-  <li>Tu</li>
-  <li>We</li>
-  <li>Th</li>
-  <li>Fr</li>
-  <li>Sa</li>
-  <li>Su</li>
-</ul>
-
- */

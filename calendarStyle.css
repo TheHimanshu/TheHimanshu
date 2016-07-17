@@ -64,7 +64,6 @@ body {font-family: Verdana,sans-serif;}
     text-align: center;
     margin-bottom: 6px;
     font-size:12px;
-    color: #777;
 }
 
 .days li .active {
@@ -72,6 +71,11 @@ body {font-family: Verdana,sans-serif;}
     background: #1abc9c;
     border-radius: 15px;
     color: white !important
+}
+
+.days .today {
+    border: groove;
+    border-color: black;
 }
 
 /* Add media queries for smaller screens */
