@@ -1,43 +1,47 @@
-var month = ["July", "August", "September", "October", "November", "December"];//"January", "Febuary", "March", "April", "May", "June", 
+var month = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 var d = new Date();
 var n = d.getMonth();
 window.onload = function(){
     var div = document.getElementsByTagName("div");
     var length = div.length;
-    var len;
-    var j = 0, empty = 4, offThree = true, curMonth = false, clas = '', workDays = 1;// already worked for 1 day
-    for(var i = 0; i < length; i++){
-        if(i == n - 6)
+    var daysInThisMonth, boxesNotUsed;
+    var j = 0, k = 1, dateOneStartAfterDay = 6, daysOff = 2, threeDaysOff = false, curMonth = false, clas = '', totalBoxes = 42, daysAWeek = 7, workDays = -2;// already worked for 1 day
+    for(var i = 0; i < length; i++){ // for each month
+        k = 1;
+        if(i == n)
         {
             curMonth = true;
         }
         var day = "";
-        for(var x = 0; x < empty; x++){
+        for(var x = 0; x < dateOneStartAfterDay; x++){
             day += "<li></li>";
         }
+        while(workDays < 0)
+            { // set extra initial days as off else workdays should start positively or 0
+                day += "<li><span class='active'>" + k++ + "</span></li>";
+                workDays++;
+            }
         if(i == 0){
-            len = 31;
-            if(empty == 6){
-                empty == 0;
-            }else{
-                empty += 3; 
-            }
+            daysInThisMonth = 31;
+        }else if(i == 1){
+            daysInThisMonth = 28;
         }else if(i % 2 == 0){
-            len = 30;
-            if(empty == 6){
-                empty == 0;
-            }else{
-                empty += 2; 
-            }
+            daysInThisMonth = 31;
         }else{
-            len = 31;
-            if(empty == 6){
-                empty == 0;
-            }else{
-                empty += 3; 
-            }
+            daysInThisMonth = 30;
         }
-        for(var k = 1; k <= len;){
+        
+        boxesNotUsed = totalBoxes - daysInThisMonth - dateOneStartAfterDay;
+        
+        dateOneStartAfterDay = daysAWeek - boxesNotUsed;
+        
+        if(dateOneStartAfterDay < 0)
+        {
+            dateOneStartAfterDay = daysAWeek + dateOneStartAfterDay;
+        }
+        
+        while(k <= daysInThisMonth){
+            console.log(k);
             if(curMonth && k == d.getDate())
             {
                 clas = " class = 'today'";
@@ -47,17 +51,21 @@ window.onload = function(){
                 clas = '';
             }
             if(workDays == 5){
-                if(offThree){
+                while(daysOff > 0 && k <=daysInThisMonth){
                    day += "<li"+ clas +"><span class='active'>" + k++ + "</span></li>";
-                   day += "<li"+ clas +"><span class='active'>" + k++ + "</span></li>";
-                   day += "<li"+ clas +"><span class='active'>" + k++ + "</span></li>";                   
-                   offThree = false;
-                }else{
-                   day += "<li><span class='active'>" + k++ + "</span></li>";
-                   day += "<li><span class='active'>" + k++ + "</span></li>";
-                   offThree = true;
+                   daysOff--;
                 }
-                workDays = 0;
+                workDays = 0 - daysOff;
+                if(threeDaysOff)
+                {
+                    daysOff = 2;
+                    threeDaysOff = false;
+                }
+                else
+                {
+                    daysOff = 3;
+                    threeDaysOff = true;
+                }
             }else{
                 day += "<li"+ clas +">" + k + "</li>";
                 k++;
@@ -68,7 +76,7 @@ window.onload = function(){
                                                     '<ul>' +
                                                         '<li style="text-align:center">' +
                                                             month[i] + '<br>' +
-                                                            '<span style="font-size:18px">2016</span>' +
+                                                            '<span style="font-size:18px">2017</span>' +
                                                         '</li>' +
                                                     '</ul>' +
                                                 '</div>' +
@@ -86,6 +94,6 @@ window.onload = function(){
                                                 '</ul>');
                                                
         div[j].innerHTML = monthDayDate.textContent;  
-        j = j + 2;        
+        j = j + 2;  // since we add another div in "monthDayDate"      
     }
-}
+}                                                                                        
