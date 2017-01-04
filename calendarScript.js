@@ -5,13 +5,9 @@ window.onload = function(){
     var div = document.getElementsByTagName("div");
     var length = div.length;
     var daysInThisMonth, boxesNotUsed;
-    var j = 0, k = 1, dateOneStartAfterDay = 6, daysOff = 2, threeDaysOff = false, curMonth = false, clas = '', totalBoxes = 42, daysAWeek = 7, workDays = -2;// already worked for 1 day
+    var j = 0, k = 1, dateOneStartAfterDay = 6, daysOff = 3, threeDaysOff = true, curMonth = false, clas = '', totalBoxes = 42, daysAWeek = 7, workDays = 5;// already worked for 1 day
     for(var i = 0; i < length; i++){ // for each month
         k = 1;
-        if(i == n)
-        {
-            curMonth = true;
-        }
         var day = "";
         for(var x = 0; x < dateOneStartAfterDay; x++){
             day += "<li></li>";
@@ -41,18 +37,9 @@ window.onload = function(){
         }
         
         while(k <= daysInThisMonth){
-            console.log(k);
-            if(curMonth && k == d.getDate())
-            {
-                clas = " class = 'today'";
-                curMonth = false;
-            }else
-            {
-                clas = '';
-            }
             if(workDays == 5){
                 while(daysOff > 0 && k <=daysInThisMonth){
-                   day += "<li"+ clas +"><span class='active'>" + k++ + "</span></li>";
+                   day += "<li><span class='active'>" + k++ + "</span></li>";
                    daysOff--;
                 }
                 workDays = 0 - daysOff;
@@ -95,5 +82,21 @@ window.onload = function(){
                                                
         div[j].innerHTML = monthDayDate.textContent;  
         j = j + 2;  // since we add another div in "monthDayDate"      
+    }
+    var currentDateNotFound = true;
+    j = 0;
+    var liItem;
+    while(currentDateNotFound)
+    {
+        liItem = div[n].getElementsByClassName("days")[0].getElementsByTagName("li"); 
+        if(liItem[j].textContent == "")
+        {
+            j++;
+        }
+        else
+        {
+            liItem[j + d.getDate() - 1].className = "today";
+            currentDateNotFound = false;
+        }
     }
 }                                                                                        
