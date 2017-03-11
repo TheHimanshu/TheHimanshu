@@ -1,6 +1,6 @@
 var month = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 var d = new Date();
-var n = d.getMonth();
+var divElementForCurrentMonth = d.getMonth() * 2; // because month has 2 div elements
 window.onload = function(){
     var div = document.getElementsByTagName("div");
     var length = div.length;
@@ -88,7 +88,7 @@ window.onload = function(){
     var liItem;
     while(currentDateNotFound)
     {
-        liItem = div[n].getElementsByClassName("days")[0].getElementsByTagName("li"); 
+        liItem = div[divElementForCurrentMonth].getElementsByClassName("days")[0].getElementsByTagName("li"); 
         if(liItem[j].textContent == "")
         {
             j++;
