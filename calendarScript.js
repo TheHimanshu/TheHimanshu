@@ -17,7 +17,7 @@ window.onload = function(){
                 day += "<li><span class='active'>" + k++ + "</span></li>";
                 workDays++;
             }
-        if(i == 0){
+        if(i == 0 || i == 7){
             daysInThisMonth = 31;
         }else if(i == 1){
             daysInThisMonth = 28;
