@@ -1,10 +1,11 @@
 var month = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var daysInThisMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
 var d = new Date();
 var divElementForCurrentMonth = d.getMonth() * 2; // because month has 2 div elements
 window.onload = function(){
     var div = document.getElementsByTagName("div");
     var length = div.length;
-    var daysInThisMonth, boxesNotUsed;
+    var boxesNotUsed;
     var j = 0, k = 1, dateOneStartAfterDay = 6, daysOff = 3, threeDaysOff = true, curMonth = false, clas = '', totalBoxes = 42, daysAWeek = 7, workDays = 5;// already worked for 1 day
     for(var i = 0; i < length; i++){ // for each month
         k = 1;
@@ -17,17 +18,8 @@ window.onload = function(){
                 day += "<li><span class='active'>" + k++ + "</span></li>";
                 workDays++;
             }
-        if(i == 0 || i == 7){
-            daysInThisMonth = 31;
-        }else if(i == 1){
-            daysInThisMonth = 28;
-        }else if(i % 2 == 0){
-            daysInThisMonth = 31;
-        }else{
-            daysInThisMonth = 30;
-        }
         
-        boxesNotUsed = totalBoxes - daysInThisMonth - dateOneStartAfterDay;
+        boxesNotUsed = totalBoxes - daysInThisMonth[i] - dateOneStartAfterDay;
         
         dateOneStartAfterDay = daysAWeek - boxesNotUsed;
         
@@ -36,9 +28,9 @@ window.onload = function(){
             dateOneStartAfterDay = daysAWeek + dateOneStartAfterDay;
         }
         
-        while(k <= daysInThisMonth){
+        while(k <= daysInThisMonth[i]){
             if(workDays == 5){
-                while(daysOff > 0 && k <=daysInThisMonth){
+                while(daysOff > 0 && k <=daysInThisMonth[i]){
                    day += "<li><span class='active'>" + k++ + "</span></li>";
                    daysOff--;
                 }
