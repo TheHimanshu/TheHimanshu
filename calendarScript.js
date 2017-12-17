@@ -6,7 +6,20 @@ window.onload = function(){
     var div = document.getElementsByTagName("div");
     var length = div.length;
     var boxesNotUsed;
-    var j = 0, k = 1, dateOneStartAfterDay = 6, daysOff = 3, threeDaysOff = true, curMonth = false, clas = '', totalBoxes = 42, daysAWeek = 7, workDays = 5;// already worked for 1 day
+    var j = 0, k = 1, 
+    //*************Edit*******************
+    dateOneStartAfterDay = 0, // Jan 1 start on Monday then set it to 0 else calculate accordingly
+    //************************************
+    
+    //*************Edit*******************
+    daysOff = 2, threeDaysOff = false, // Number of days off first time in january
+    //************************************
+    
+    curMonth = false, clas = '', totalBoxes = 42, daysAWeek = 7, 
+    
+    //*************Edit*******************
+    workDays = 2;// Number of days already worked in december last year
+    //************************************
     for(var i = 0; i < length; i++){ // for each month
         k = 1;
         var day = "";
@@ -55,7 +68,7 @@ window.onload = function(){
                                                     '<ul>' +
                                                         '<li style="text-align:center">' +
                                                             month[i] + '<br>' +
-                                                            '<span style="font-size:18px">2017</span>' +
+                                                            '<span style="font-size:18px">2018</span>' +
                                                         '</li>' +
                                                     '</ul>' +
                                                 '</div>' +
