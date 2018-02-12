@@ -1,3 +1,6 @@
+// random color picker
+var color = ["1a69bc", "bc1a90", "951abc", "681abc", "41bc1a", "e6732e", "fb9411"];
+var randomNumber = Math.floor((Math.random() * 7)); // random from 0 to 6
 var month = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 var daysInThisMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
 var d = new Date();
@@ -28,7 +31,7 @@ window.onload = function(){
         }
         while(workDays < 0)
             { // set extra initial days as off else workdays should start positively or 0
-                day += "<li><span class='active'>" + k++ + "</span></li>";
+                day += "<li><span class='active' style='background:#"+color[randomNumber]+"'>" + k++ + "</span></li>";
                 workDays++;
             }
         
@@ -44,7 +47,7 @@ window.onload = function(){
         while(k <= daysInThisMonth[i]){
             if(workDays == 5){
                 while(daysOff > 0 && k <=daysInThisMonth[i]){
-                   day += "<li><span class='active'>" + k++ + "</span></li>";
+                   day += "<li><span class='active' style='background:#"+color[randomNumber]+"'>" + k++ + "</span></li>";
                    daysOff--;
                 }
                 workDays = 0 - daysOff;
@@ -64,7 +67,7 @@ window.onload = function(){
                 workDays++;
             }
         }
-        var monthDayDate = document.createTextNode('<div class="month">' + 
+        var monthDayDate = document.createTextNode('<div class="month" style="background:#'+color[randomNumber]+'">' + 
                                                     '<ul>' +
                                                         '<li style="text-align:center">' +
                                                             month[i] + '<br>' +
@@ -90,10 +93,9 @@ window.onload = function(){
     }
     var currentDateNotFound = true;
     j = 0;
-    var liItem;
+    var liItem = div[divElementForCurrentMonth].getElementsByClassName("days")[0].getElementsByTagName("li"); 
     while(currentDateNotFound)
     {
-        liItem = div[divElementForCurrentMonth].getElementsByClassName("days")[0].getElementsByTagName("li"); 
         if(liItem[j].textContent == "")
         {
             j++;
